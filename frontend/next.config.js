@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
+  basePath: '/az-sociofiscal-sim',
+  assetPrefix: '/az-sociofiscal-sim/',
   images: {
     unoptimized: true,
   },
