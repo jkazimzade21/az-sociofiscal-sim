@@ -1,8 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
-  basePath: '/az-sociofiscal-sim',
-  assetPrefix: '/az-sociofiscal-sim/',
+  // Remove basePath/assetPrefix when serving from root domain
+  // basePath: '/az-sociofiscal-sim',
+  // assetPrefix: '/az-sociofiscal-sim/',
   images: {
     unoptimized: true,
   },

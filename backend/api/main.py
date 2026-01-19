@@ -4,6 +4,7 @@ FastAPI Application for Azerbaijan Simplified Tax Calculator.
 This is the main entry point for the API server.
 """
 
+import os
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -11,6 +12,18 @@ from fastapi.middleware.cors import CORSMiddleware
 from . import __version__
 from .routes import simplified_tax_router
 from .schemas.responses import HealthResponse
+
+
+def get_cors_origins() -> list[str]:
+    """Get CORS origins from environment or use defaults."""
+    env_origins = os.environ.get("CORS_ORIGINS", "")
+    if env_origins:
+        return [origin.strip() for origin in env_origins.split(",") if origin.strip()]
+    return [
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        "http://frontend:3000",
+    ]
 
 
 @asynccontextmanager
@@ -54,11 +67,7 @@ app = FastAPI(
 # CORS middleware for frontend access
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-        "http://frontend:3000",
-    ],
+    allow_origins=get_cors_origins(),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
