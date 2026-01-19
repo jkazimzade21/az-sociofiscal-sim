@@ -20,6 +20,14 @@ def get_cors_origins() -> list[str]:
     if env_origins:
         return [origin.strip() for origin in env_origins.split(",") if origin.strip()]
     return [
+        # Production domains
+        "https://timeart.az",
+        "https://www.timeart.az",
+        "http://timeart.az",
+        "http://www.timeart.az",
+        # GitHub Pages
+        "https://jkazimzade21.github.io",
+        # Development
         "http://localhost:3000",
         "http://127.0.0.1:3000",
         "http://frontend:3000",
